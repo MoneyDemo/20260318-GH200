@@ -9,10 +9,11 @@ jobs:
         os: [ubuntu-latest]
         node: [24]
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/demo-action
         with:
           date: '0318'
           node-version: ${{ matrix.node }}
-          
+
       - name: Output node version
         run: node --version
