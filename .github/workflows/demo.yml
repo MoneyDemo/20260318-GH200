@@ -1,41 +1,16 @@
-name: Demo
-
-on:
-  push:
-    branches:
-      - 'main'
-  workflow_dispatch:
-
-env:
-  buildConfig: Debug
-
+name: Test matrix
+on: push
 
 jobs:
-  cmd1:
-    name: Build and Test
-    runs-on: ubuntu-24.04-arm
-
-    env:
-      buildConfig: Release
-
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [20, 24]
     steps:
-    - name: CMD
-      run: |
-        echo ${{ vars.DemoEnv }}
-        echo ${{ env.buildConfig }}
-        echo ${{ vars.DemoVar }}
-        echo ${{ secrets.DemoPassword}}
-
-  cmd2:
-    name: Build and Test
-    runs-on: ubuntu-24.04-arm
-    environment: prod
-
-    steps:
-    - name: CMD
-      run: |
-        echo ${{ vars.DemoEnv }}
-        echo ${{ env.buildConfig }}
-        echo ${{ vars.DemoVar }}
-        echo ${{ secrets.DemoPassword}}
-    
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Output node version
+        run: node --version
