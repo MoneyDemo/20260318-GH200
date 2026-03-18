@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore src/*.sln
 
       - name: .NET Publish
-        run: dotnet publish src/SimpleWeb/SimpleWeb.csp --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/publish
+        run: dotnet publish src/SimpleWeb/SimpleWeb.csproj --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/publish
 
       - name: Upload Artifact
         if: success()
@@ -50,4 +50,6 @@ jobs:
 
     steps:
       - name: Notify
-        run: echo "Deployment executed! State- ${{ job.status }}"
+        run: |
+          echo "Deployment executed! State- ${{ needs.deploy.result }}"
+          echo "Output - ${{ needs.deploy.outputs }}"
