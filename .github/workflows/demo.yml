@@ -31,9 +31,6 @@ jobs:
     runs-on: ubuntu-24.04-arm
     environment: prod
 
-    env:
-      buildConfig: Release
-
     steps:
     - name: CMD
       run: |
