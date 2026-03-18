@@ -30,3 +30,23 @@ jobs:
         with:
           name: drop
           path: ${{ github.workspace }}/publish
+
+  deploy:
+    needs: build
+    if: success()
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: drop
+
+  notify:
+    needs: deploy
+    if: always()
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Notify
+        run: echo "Deployment executed! State- ${{ job.status }}"
