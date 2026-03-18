@@ -1,0 +1,24 @@
+name: "My Composite Action"
+description: "A reusable composite action that checks out code and sets up Node.js"
+
+inputs:
+  date:
+    description: "The date to use"
+    required: true
+
+  node-version:
+    description: "The version of Node.js to set up"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      run: echo "Checking out code for date ${{ inputs.date }}"
+      shell: bash
+
+    - name: Set up Node.js
+      if: ${{ inputs.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
