@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: CMD
       run: |
-        echo ${{ env.DemoEnv }}
+        echo ${{ vars.DemoEnv }}
         echo ${{ env.buildConfig }}
         echo ${{ vars.DemoVar }}
         echo ${{ secrets.DemoPassword}}
@@ -34,7 +34,7 @@ jobs:
     steps:
     - name: CMD
       run: |
-        echo ${{ env.DemoEnv }}
+        echo ${{ vars.DemoEnv }}
         echo ${{ env.buildConfig }}
         echo ${{ vars.DemoVar }}
         echo ${{ secrets.DemoPassword}}
