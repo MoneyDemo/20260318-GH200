@@ -11,7 +11,7 @@ env:
 
 
 jobs:
-  build:
+  cmd1:
     name: Build and Test
     runs-on: ubuntu-24.04-arm
 
@@ -21,8 +21,24 @@ jobs:
     steps:
     - name: CMD
       run: |
+        echo ${{ env.DemoEnv }}
         echo ${{ env.buildConfig }}
         echo ${{ vars.DemoVar }}
         echo ${{ secrets.DemoPassword}}
 
+  cmd2:
+    name: Build and Test
+    runs-on: ubuntu-24.04-arm
+    environment: prod
+
+    env:
+      buildConfig: Release
+
+    steps:
+    - name: CMD
+      run: |
+        echo ${{ env.DemoEnv }}
+        echo ${{ env.buildConfig }}
+        echo ${{ vars.DemoVar }}
+        echo ${{ secrets.DemoPassword}}
     
