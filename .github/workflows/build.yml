@@ -33,7 +33,7 @@ jobs:
       run: dotnet build src/*.sln --configuration Release --no-restore
 
     - run: |
-        dotnet test src/SimpleWeb.UnitTests/SimpleWeb.UnitTests.csproj --configuration Release --no-restore --no-build --verbosity normal
+        dotnet test src/SimpleWeb.UnitTest/SimpleWeb.UnitTest.csproj --configuration Release --no-restore --no-build --verbosity normal
 
         echo Hello, world!
       name: Run tests
