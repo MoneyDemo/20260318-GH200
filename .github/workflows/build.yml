@@ -12,10 +12,15 @@ on:
   repository_dispatch:
     types: [build]
 
+
+
 jobs:
   build:
     name: Build and Test
     runs-on: ubuntu-24.04-arm
+
+    env:
+      buidConfig: Release
 
     steps:
     - uses: actions/checkout@v2
@@ -30,10 +35,10 @@ jobs:
       name: Restore dependencies
 
     - name: Build solution
-      run: dotnet build src/*.sln --configuration Release --no-restore
+      run: dotnet build src/*.sln --configuration ${{ env.buidConfig }} --no-restore
 
     - run: |
-        dotnet test src/SimpleWeb.UnitTest/SimpleWeb.UnitTest.csproj --configuration Release --no-restore --no-build --verbosity normal
+        dotnet test src/SimpleWeb.UnitTest/SimpleWeb.UnitTest.csproj --configuration ${{ env.buidConfig }} --no-restore --no-build --verbosity normal
 
         echo Hello, world!
       name: Run tests

@@ -1,0 +1,28 @@
+name: Demo
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+env:
+  buildConfig: Debug
+
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-24.04-arm
+
+    env:
+      buildConfig: Release
+
+    steps:
+    - name: CMD
+      run: |
+        echo ${{ env.buildConfig }}
+        echo ${{ vars.DemoVar }}
+        echo ${{ secrets.DemoPassword}}
+
+    
