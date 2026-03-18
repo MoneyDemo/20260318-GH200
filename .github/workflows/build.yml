@@ -23,9 +23,10 @@ jobs:
         run: dotnet restore src/*.sln
 
       - name: .NET Publish
-        run: dotnet publish src/SimpleWeb/SimpleWeb.csproj --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/publish
+        run: dotnet publish src/SimpleWeb/SimpleWeb.csp --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/publish
 
       - name: Upload Artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: drop
